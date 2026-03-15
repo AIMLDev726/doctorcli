@@ -1,181 +1,116 @@
 # doctorcli
 
-[GitHub Repository](https://github.com/AIMLDev726/doctorcli)
+> Your AI Medical Specialist in the Terminal
 
-`doctorcli` is a specialist-first medical AI CLI for structured health conversations, persistent sessions, multi-provider model access, and optional live research tools inside a terminal-first workflow.
+[![PyPI version](https://img.shields.io/pypi/v/doctorcli.svg)](https://pypi.org/project/doctorcli/)
 
-## What it does
+---
 
-`doctorcli` is designed for users who want a focused medical AI shell instead of a generic chatbot. You choose a specialist persona, create or reopen sessions, select your preferred model provider, optionally attach tools, and continue conversations with session memory preserved across runs.
+## What is doctorcli?
 
-## Features
+**doctorcli** is a user-friendly command-line tool that brings specialist-level medical AI directly to your terminal. It lets you chat with AI doctors from different specialties (like general medicine, cardiology, dermatology, pediatrics, and more), keep your conversations organized, and even use live research tools—all in a privacy-respecting, session-based workflow.
 
-- Specialist medical agents for different domains such as general medicine, cardiology, dermatology, pediatrics, orthopedics, and more
-- Rich terminal interface with markdown rendering and streamed model responses
-- Persistent sessions with saved transcript, metadata, and memory per conversation
-- Provider setup and live model discovery from supported APIs
-- Optional tool attachment per session
-- Visible tool-call output in chat, including returned sources when tools are used
-- Session resume, session deletion, and provider/model reuse for existing conversations
-- Support for cloud and local model providers
+---
 
-## Supported providers
+## Why use doctorcli?
 
-Cloud providers:
+- **Specialist AI agents**: Choose the right expert for your needs.
+- **Easy session management**: Start, resume, and organize your health conversations.
+- **Multiple AI providers**: Use OpenAI, Gemini, Claude, Groq, Ollama, LM Studio, and more.
+- **Attach research tools**: Add Wikipedia or Tavily for live lookups.
+- **No cloud lock-in**: Use local or cloud models.
+- **Your data, your control**: All chats and settings are stored locally.
 
-- OpenAI
-- Gemini
-- Groq
-- Claude
+---
 
-Local providers:
+## How was it built?
 
-- Ollama
-- LM Studio
+doctorcli is built in Python and designed for reliability, privacy, and extensibility. It uses a modular architecture with support for multiple AI providers and research tools, and a rich terminal interface for a smooth user experience.
 
-## Supported tools
+---
 
-- Wikipedia
-  - Good for reference lookups on conditions, medications, symptoms, and background concepts
-  - No API key required
-- Tavily
-  - Good for live web search and current-information lookups
-  - Requires a Tavily API key
+## How do I install it?
 
-If the selected model supports tool calling and the session has tools attached, the model can decide dynamically when to use them.
-
-## Installation
-
-Install from PyPI:
+Install from PyPI (recommended):
 
 ```bash
 pip install doctorcli
 ```
 
-Install from source:
+Or install from source:
 
 ```bash
 pip install .
 ```
 
-Install for development:
+---
+
+## How do I use it?
+
+1. **Start the app:**
+   ```bash
+   doctorcli
+   ```
+2. **Configure providers (first run):**
+   - Go to `Settings` to add your API keys for OpenAI, Gemini, etc., or use local models like Ollama.
+   - Optionally, add a Tavily API key for live web search.
+3. **Pick your specialist:**
+   - Choose from general medicine, dermatology, pediatrics, and more.
+4. **Start a session:**
+   - Begin a new conversation or resume an old one. Sessions remember your chat history and context.
+5. **Ask your questions:**
+   - Get structured, specialist-level answers. Attach tools for live research if needed.
+6. **Use in-session commands:**
+   - `/memory` — See what the AI remembers.
+   - `/session` — View session details.
+   - `/settings` — Change providers or tools.
+   - `/exit` — Leave the session.
+
+---
+
+## Example: Quick Start
 
 ```bash
-pip install -e ".[dev]"
-```
+pip install doctorcli
 
-## Quick start
-
-Run the CLI:
-
-```bash
 doctorcli
 ```
 
-Typical session flow:
+- Choose your specialist (e.g., General Medicine)
+- Start chatting!
 
-1. Open `doctorcli`.
-2. Go to `Settings` if you need to configure providers or tool API keys.
-3. Open `Dashboard`.
-4. Choose a specialist agent.
-5. Start a new session or reopen an existing one.
-6. Choose a provider and model.
-7. Optionally attach tools for that session.
-8. Ask your questions and continue the same session later.
+---
 
-## Settings workflow
+## Supported Providers & Tools
 
-Inside `Settings`, you can:
+- **Cloud AI:** OpenAI, Gemini, Claude, Groq
+- **Local AI:** Ollama, LM Studio
+- **Tools:**
+  - Wikipedia (no API key needed)
+  - Tavily (API key required for live web search)
 
-- add or update provider API keys
-- configure provider base URL overrides when needed
-- fetch live model lists from supported APIs
-- choose a default model per provider
-- configure tool credentials such as Tavily
+---
 
-## In-session commands
+## Where is my data stored?
 
-While chatting, these commands are available:
+All your settings, sessions, and chat history are stored locally in your system's app data folder. Nothing is sent to any server except the AI/model providers you choose.
 
-- `/memory` to inspect session memory
-- `/session` to inspect current session metadata
-- `/settings` to jump into settings
-- `/exit` to leave the current chat session
+---
 
-## Tool usage behavior
+## Thank You!
 
-When a tool is used during a response, `doctorcli` shows:
+Thank you for using doctorcli! We hope it helps you get reliable, specialist-level answers and organize your health questions with confidence.
 
-- the tool name
-- the tool query
-- the returned summary
-- the source list, when available
+---
 
-This makes it clear when the model answered from the base model alone versus when it used an attached tool.
+## Want to contribute?
 
-## Local storage
+We welcome contributions, bug reports, and feature requests!
 
-`doctorcli` stores local application data in your platform app-data directory.
+- [GitHub Repository](https://github.com/AIMLDev726/doctorcli)
+- [Open an Issue](https://github.com/AIMLDev726/doctorcli/issues)
 
-Typical stored data includes:
-
-- provider settings and cached model catalogs
-- session metadata
-- chat transcripts and memory
-
-## Example use cases
-
-- create a general medicine session for symptom triage and follow-up questions
-- use a dermatology specialist session to organize rash-related questions before a doctor visit
-- keep a continuing chronic-care session with the same provider and model setup
-- attach Tavily when you want the model to look up current external information
-- attach Wikipedia when you want a lightweight reference tool without another API dependency
-
-## Developer guide
-
-Clone the repository:
-
-```bash
-git clone https://github.com/AIMLDev726/doctorcli.git
-cd doctorcli
-```
-
-Install development dependencies:
-
-```bash
-pip install -e ".[dev]"
-```
-
-Run a compile check:
-
-```bash
-python -m compileall src
-```
-
-Build release artifacts:
-
-```bash
-python -m build --outdir release-dist
-```
-
-Validate the package before publishing:
-
-```bash
-python -m twine check release-dist/*
-```
-
-## Release notes
-
-Current package version:
-
-- `1.0.0`
-
-## Contributing
-
-Contributions, bug reports, and feature requests are welcome.
-
-- Repository: [github.com/AIMLDev726/doctorcli](https://github.com/AIMLDev726/doctorcli)
-- Issues: [github.com/AIMLDev726/doctorcli/issues](https://github.com/AIMLDev726/doctorcli/issues)
+---
 
 ## License
 
