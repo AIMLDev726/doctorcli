@@ -1,59 +1,23 @@
-﻿# doctorcli
+# doctorcli
 
 [GitHub Repository](https://github.com/AIMLDev726/doctorcli)
 
-`doctorcli` is a specialist-first medical AI CLI for structured conversations, persistent sessions, optional live tools, and multi-provider model support.
+`doctorcli` is a specialist-first medical AI CLI for structured health conversations, persistent sessions, multi-provider model access, and optional live research tools inside a terminal-first workflow.
 
-## Why use doctorcli
+## What it does
 
-`doctorcli` is built for people who want a focused terminal experience instead of a generic chat window. It gives you specialist personas, saved sessions, provider and model control, and a clean markdown-rendered interface for medical Q&A workflows.
+`doctorcli` is designed for users who want a focused medical AI shell instead of a generic chatbot. You choose a specialist persona, create or reopen sessions, select your preferred model provider, optionally attach tools, and continue conversations with session memory preserved across runs.
 
-## Highlights
+## Features
 
-- Specialist personas for multiple medical domains
-- Rich terminal UI with streaming markdown responses
-- Persistent sessions with memory across runs
-- Live model discovery and default model selection per provider
-- Optional session tools such as Wikipedia and Tavily web search
-- Visible tool-call output with returned sources in chat
-- Support for OpenAI, Gemini, Groq, Claude, Ollama, and LM Studio
-
-## Installation
-
-Install from PyPI:
-
-```bash
-pip install doctorcli
-```
-
-Install from source:
-
-```bash
-pip install .
-```
-
-Install in editable mode for development:
-
-```bash
-pip install -e ".[dev]"
-```
-
-## Quick start
-
-Run the CLI:
-
-```bash
-doctorcli
-```
-
-Typical flow:
-
-1. Open the app.
-2. Choose a specialist.
-3. Start a new session or continue an existing one.
-4. Select a provider and model.
-5. Optionally attach tools for that session.
-6. Ask questions and continue the session later with memory preserved.
+- Specialist medical agents for different domains such as general medicine, cardiology, dermatology, pediatrics, orthopedics, and more
+- Rich terminal interface with markdown rendering and streamed model responses
+- Persistent sessions with saved transcript, metadata, and memory per conversation
+- Provider setup and live model discovery from supported APIs
+- Optional tool attachment per session
+- Visible tool-call output in chat, including returned sources when tools are used
+- Session resume, session deletion, and provider/model reuse for existing conversations
+- Support for cloud and local model providers
 
 ## Supported providers
 
@@ -71,49 +35,144 @@ Local providers:
 
 ## Supported tools
 
-- Wikipedia: reference lookup for conditions, medications, symptoms, and background topics
-- Tavily: live web search for current medical and factual context
+- Wikipedia
+  - Good for reference lookups on conditions, medications, symptoms, and background concepts
+  - No API key required
+- Tavily
+  - Good for live web search and current-information lookups
+  - Requires a Tavily API key
 
-When a model uses an attached tool, `doctorcli` shows the tool call, the returned summary, and the available sources directly in the chat transcript.
+If the selected model supports tool calling and the session has tools attached, the model can decide dynamically when to use them.
 
-## Session features
+## Installation
 
-- Create named sessions with a consultation reason
-- Reopen past sessions with the original provider and model setup
-- Keep a running transcript and memory through the session lifecycle
-- Use `/memory`, `/session`, `/settings`, and `/exit` commands inside chat
+Install from PyPI:
+
+```bash
+pip install doctorcli
+```
+
+Install from source:
+
+```bash
+pip install .
+```
+
+Install for development:
+
+```bash
+pip install -e ".[dev]"
+```
+
+## Quick start
+
+Run the CLI:
+
+```bash
+doctorcli
+```
+
+Typical session flow:
+
+1. Open `doctorcli`.
+2. Go to `Settings` if you need to configure providers or tool API keys.
+3. Open `Dashboard`.
+4. Choose a specialist agent.
+5. Start a new session or reopen an existing one.
+6. Choose a provider and model.
+7. Optionally attach tools for that session.
+8. Ask your questions and continue the same session later.
+
+## Settings workflow
+
+Inside `Settings`, you can:
+
+- add or update provider API keys
+- configure provider base URL overrides when needed
+- fetch live model lists from supported APIs
+- choose a default model per provider
+- configure tool credentials such as Tavily
+
+## In-session commands
+
+While chatting, these commands are available:
+
+- `/memory` to inspect session memory
+- `/session` to inspect current session metadata
+- `/settings` to jump into settings
+- `/exit` to leave the current chat session
+
+## Tool usage behavior
+
+When a tool is used during a response, `doctorcli` shows:
+
+- the tool name
+- the tool query
+- the returned summary
+- the source list, when available
+
+This makes it clear when the model answered from the base model alone versus when it used an attached tool.
 
 ## Local storage
 
-`doctorcli` stores local state in your platform application directories.
+`doctorcli` stores local application data in your platform app-data directory.
 
-- Settings: `doctorcli/settings.json`
-- Sessions: `doctorcli/sessions/*.json`
-- Cached provider model catalogs: stored with settings
+Typical stored data includes:
 
-## Development
+- provider settings and cached model catalogs
+- session metadata
+- chat transcripts and memory
 
-Run tests:
+## Example use cases
+
+- create a general medicine session for symptom triage and follow-up questions
+- use a dermatology specialist session to organize rash-related questions before a doctor visit
+- keep a continuing chronic-care session with the same provider and model setup
+- attach Tavily when you want the model to look up current external information
+- attach Wikipedia when you want a lightweight reference tool without another API dependency
+
+## Developer guide
+
+Clone the repository:
 
 ```bash
-python -m pytest
+git clone https://github.com/AIMLDev726/doctorcli.git
+cd doctorcli
+```
+
+Install development dependencies:
+
+```bash
+pip install -e ".[dev]"
+```
+
+Run a compile check:
+
+```bash
+python -m compileall src
 ```
 
 Build release artifacts:
 
 ```bash
-python -m build
+python -m build --outdir release-dist
 ```
 
-Validate artifacts before publishing:
+Validate the package before publishing:
 
 ```bash
-python -m twine check dist/*
+python -m twine check release-dist/*
 ```
+
+## Release notes
+
+Current package version:
+
+- `1.0.0`
 
 ## Contributing
 
-Contributions, issues, and feature requests are welcome.
+Contributions, bug reports, and feature requests are welcome.
 
 - Repository: [github.com/AIMLDev726/doctorcli](https://github.com/AIMLDev726/doctorcli)
 - Issues: [github.com/AIMLDev726/doctorcli/issues](https://github.com/AIMLDev726/doctorcli/issues)
